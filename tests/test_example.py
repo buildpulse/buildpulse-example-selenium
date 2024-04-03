@@ -1,6 +1,9 @@
 import unittest
 from selenium import webdriver
+import chromedriver_autoinstaller
 import xmlrunner
+
+chromedriver_autoinstaller.install()
 
 class ExampleTest(unittest.TestCase):
     def setUp(self):
