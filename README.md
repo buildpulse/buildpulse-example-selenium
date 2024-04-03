@@ -6,7 +6,7 @@ You can run tests via `python -m xmlrunner discover -s tests -o test-reports`
 
 ## GitHub Actions CI Integration
 
-If you have an existing Selenium project building on GitHub Actions CI, this [diff](https://github.com/buildpulse/buildpulse-example-cypress/compare/pre-buildpulse...github-actions) shows how to set up your GitHub Actions workflow to send test results to BuildPulse.
+If you have an existing Selenium project building on GitHub Actions CI, this [diff](https://github.com/buildpulse/buildpulse-example-selenium/commit/b2f8cec7c2da6eac0d46b87ca3271471d63fd163) shows how to set up your GitHub Actions workflow to send test results to BuildPulse.
 
 ## Other
 Please see [test-reporter](https://github.com/buildpulse/test-reporter) usage for uploading results from any CI provider. 
