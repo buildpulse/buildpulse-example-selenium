@@ -5,41 +5,31 @@ jobs:
   test:
     runs-on: bp-ubuntu-latest-x64-2x
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8'
+          python-version: '3.12'
+
+      - name: Set up Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          install-chromedriver: true
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - uses: browser-actions/setup-chrome@v1
-
-      - name: Removing previous chrome instances on runner 
-        run: sudo apt purge google-chrome-stable || true  
-        
-      - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
-
-      - name: Install xvfb
-        run: sudo apt-get install xvfb
+        run: pip install -r requirements.txt
 
       - name: Run tests
+        env:
+          CHROME_BIN: ${{ steps.chrome.outputs.chrome-path }}
         run: python -m xmlrunner discover -s tests
 
       - name: Upload test results to BuildPulse
-
         # BuildPulse is most useful when tests FAILED, so run on red builds too.
-
         if: always()
-
         uses: BuildPulseLLC/test-reporter-action@v3
-
         with:
-
           api-token: ${{ secrets.BUILDPULSE_API_TOKEN }}
-
           path: .
