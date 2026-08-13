@@ -16,8 +16,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - uses: browser-actions/setup-chrome@v1
+
       - name: Removing previous chrome instances on runner 
-        run: sudo apt purge google-chrome-stable  
+        run: sudo apt purge google-chrome-stable || true  
         
       - name: Installing all necessary packages
         run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
